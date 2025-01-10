@@ -3,18 +3,22 @@ function setupClickListener() {
     // Ambil elemen kubus menggunakan ID
     const cube = document.querySelector("#myCube");
 
-    // Tambahkan event listener untuk klik/tap
-    cube.addEventListener("click", function () {
-        // Ubah warna kubus secara acak
+    // Fungsi untuk mengubah warna kubus
+    function changeColor() {
+        // Buat warna acak dalam format hex
         const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        // Ubah warna kubus
         cube.setAttribute("color", randomColor);
-
         // Tampilkan pesan di konsol
         console.log("Kubus diklik! Warna berubah menjadi: " + randomColor);
-    });
+    }
+
+    // Tambahkan event listener untuk klik (desktop) dan touchstart (smartphone)
+    cube.addEventListener("click", changeColor);
+    cube.addEventListener("touchstart", changeColor);
 }
 
 // Jalankan fungsi setelah scene siap
-window.addEventListener("load", function () {
+document.querySelector("a-scene").addEventListener("loaded", function () {
     setupClickListener();
 });
